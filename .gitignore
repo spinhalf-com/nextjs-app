@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /.pnp
+/.pnpm-store/
 .pnp.js
 
 # testing
@@ -34,3 +35,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+/.idea/

@@ -1,7 +1,8 @@
 version: '3.8'
 
 services:
-  app:
+  next:
+    container_name: next
     build:
       context: .
       dockerfile: Dockerfile
