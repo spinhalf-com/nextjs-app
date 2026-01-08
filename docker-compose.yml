@@ -12,21 +12,23 @@ services:
       - .:/app
       - /app/node_modules
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=development
     networks:
       - next
+    depends_on:
+      db:
+        condition: service_healthy
 
   db:
-    #    image: postgres:13
     build:
       context: ./containers/pgsql
       dockerfile: Dockerfile
     container_name: db
     restart: always
     environment:
-      POSTGRES_DB: next
-      POSTGRES_USER: next
-      POSTGRES_PASSWORD: next
+      POSTGRES_DB: nextjs
+      POSTGRES_USER: nextjs
+      POSTGRES_PASSWORD: nextjs
     ports:
       - "5432:5432"
     volumes:
@@ -34,6 +36,11 @@ services:
       - ./containers/pgsql/init.sh/:/docker-entrypoint-initdb.d/
     networks:
       - next
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U next -d next" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
 networks:
   next:
