@@ -13,18 +13,18 @@ services:
       - /app/node_modules
     environment:
       - NODE_ENV=development
-      - POSTGRES_URL=postgres://nextjs:nextjs@db:5432/nextjs
+      - POSTGRES_URL=postgres://nextjs:nextjs@nextdb:5432/nextjs
     networks:
       - next
     depends_on:
-      db:
+      nextdb:
         condition: service_healthy
 
-  db:
+  nextdb:
     build:
       context: ./containers/pgsql
       dockerfile: Dockerfile
-    container_name: db
+    container_name: nextdb
     restart: always
     environment:
       POSTGRES_DB: nextjs
@@ -39,9 +39,9 @@ services:
       - next
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U next -d next" ]
-      interval: 5s
-      timeout: 5s
-      retries: 5
+      interval: 10s
+      timeout: 10s
+      retries: 10
 
 networks:
   next:
