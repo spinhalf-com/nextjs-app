@@ -7,8 +7,11 @@ then
   yes | docker system prune
   yes | docker network prune
   yes | docker volume prune
-
 fi
 docker-compose up -d --build
-#docker-compose exec -it next 'yes | pnpm install'
-docker cp next:app/node_modules/ ./node_modules
+
+if [[ $1 = '-C' ]] || [[ $2 = '-C' ]] || [[ $3 = '-C' ]]
+then
+  docker cp next:app/node_modules/ ./node_modules
+fi
+

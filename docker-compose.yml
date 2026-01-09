@@ -13,6 +13,7 @@ services:
       - /app/node_modules
     environment:
       - NODE_ENV=development
+      - POSTGRES_URL=postgres://nextjs:nextjs@db:5432/nextjs
     networks:
       - next
     depends_on:
