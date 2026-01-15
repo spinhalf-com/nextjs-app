@@ -38,9 +38,9 @@ services:
     networks:
       - next
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U next -d next" ]
-      interval: 10s
-      timeout: 10s
+      test: [ "CMD-SHELL", "pg_isready -U nextjs -d nextdb" ]
+      interval: 5s
+      timeout: 5s
       retries: 10
 
 networks:
