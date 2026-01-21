@@ -4,6 +4,7 @@ docker-compose down --remove-orphans
 if [[ $1 = '-R' ]] || [[ $2 = '-R' ]] || [[ $3 = '-R' ]]
 then
   rm -rf ./db_data/*
+#  rm -rf node_modules
   yes | docker system prune
   yes | docker network prune
   yes | docker volume prune

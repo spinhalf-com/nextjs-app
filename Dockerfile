@@ -6,14 +6,14 @@ RUN npm install -g pnpm
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
+# Copy package.json, package-lock.json, and pnpm-lock.yaml
+COPY package*.json pnpm-lock.yaml* ./
 
 # Install dependencies
 RUN pnpm install
 
 # Copy the rest of the application code
-COPY .. .
+COPY . .
 
 # Build the Next.js app
 RUN pnpm build
