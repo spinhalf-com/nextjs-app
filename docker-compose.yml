@@ -16,9 +16,9 @@ services:
       - POSTGRES_URL=postgres://nextjs:nextjs@nextdb:5432/nextjs
     networks:
       - next
-    depends_on:
-      nextdb:
-        condition: service_healthy
+#    depends_on:
+#      nextdb:
+#        condition: service_healthy
 
   nextdb:
     build:
@@ -38,7 +38,7 @@ services:
     networks:
       - next
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U nextjs -d nextdb" ]
+      test: [ "CMD-SHELL", "pg_isready -U nextjs -d nextjs" ]
       interval: 5s
       timeout: 5s
       retries: 10
