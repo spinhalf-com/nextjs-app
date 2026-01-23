@@ -20,9 +20,10 @@ services:
         limits:
           cpus: "0.5"
           memory: "512M"
-#    depends_on:
-#      nextdb:
-#        condition: service_healthy
+    restart: always
+    depends_on:
+      nextdb:
+        condition: service_healthy
 
   nextdb:
     build:
@@ -51,6 +52,8 @@ services:
         limits:
           cpus: "0.5"
           memory: "512M"
+    logging:
+      driver: "none"
 networks:
   next:
     driver: bridge

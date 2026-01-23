@@ -17,7 +17,7 @@ docker-compose up -d --build
 
 if [[ $1 = '-C' ]] || [[ $2 = '-C' ]] || [[ $3 = '-C' ]]
 then
-  rm -rf node_modules
+#  rm -rf node_modules
   docker cp next:app/node_modules/ ./node_modules
 fi
 
