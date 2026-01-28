@@ -15,6 +15,12 @@ services:
       - POSTGRES_URL=postgres://nextjs:nextjs@nextdb:5432/nextjs
     networks:
       - next
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "512M"
+    restart: always
     depends_on:
       nextdb:
         condition: service_healthy
@@ -37,11 +43,17 @@ services:
     networks:
       - next
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U nextjs -d nextdb" ]
-      interval: 5s
-      timeout: 5s
-      retries: 10
-
+      test: [ "CMD-SHELL", "pg_isready -U nextjs -d nextjs" ]
+      interval: 60s
+      timeout: 10s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "512M"
+    logging:
+      driver: "none"
 networks:
   next:
     driver: bridge

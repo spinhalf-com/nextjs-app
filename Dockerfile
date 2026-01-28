@@ -16,7 +16,7 @@ RUN pnpm install
 COPY . .
 
 # Build the Next.js app
-RUN pnpm build
+RUN #pnpm build
 
 # Expose the port the app runs on
 EXPOSE 3000
