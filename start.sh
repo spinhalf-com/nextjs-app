@@ -17,8 +17,16 @@ docker-compose up -d --build
 
 if [[ $1 = '-C' ]] || [[ $2 = '-C' ]] || [[ $3 = '-C' ]]
 then
-#  rm -rf node_modules
-  docker cp next:app/node_modules/ ./node_modules
+  if [ -d node_modules ]; then
+    echo "Fixing permissions for node_modules..."
+    # try to change ownership to current user; ignore errors
+    chown -R "$(id -u)":"$(id -g)" node_modules 2>/dev/null || true
+
+    # try to remove; if that fails, try with sudo
+    rm -rf node_modules 2>/dev/null || sudo rm -rf node_modules
+  fi
+
+  docker cp next:app/node_modules .
 fi
 
 
